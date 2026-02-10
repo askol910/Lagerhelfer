@@ -30,7 +30,18 @@ Folgen Sie der Anleitung in [FIREBASE_SETUP.md](FIREBASE_SETUP.md) oder:
 
 ### 4. Firebase-Konfiguration eintragen
 
-Öffnen Sie `frontend/src/firebase/config.js` und ersetzen Sie die Platzhalter mit Ihren Firebase-Credentials.
+**Empfohlene Methode: Environment Variables**
+
+1. Kopieren Sie die Beispiel-Datei:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Öffnen Sie `.env` und ersetzen Sie die Platzhalter mit Ihren Firebase-Credentials
+
+**Alternative: Direkt in config.js** (nur für Tests, nicht für Produktion empfohlen)
+
+Öffnen Sie `frontend/src/firebase/config.js` und ersetzen Sie die Platzhalter.
 
 ### 5. App starten
 

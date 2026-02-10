@@ -78,18 +78,25 @@ npm install
 
 ### 4. Firebase-Konfiguration eintragen
 
-Öffnen Sie `frontend/src/firebase/config.js` und ersetzen Sie die Platzhalter:
+**Option A: Direkt in der config.js (nur für Entwicklung)**
 
-```javascript
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-```
+Öffnen Sie `frontend/src/firebase/config.js` und ersetzen Sie die Platzhalter mit Ihren Firebase-Credentials.
+
+**Option B: Mit Environment Variables (empfohlen für Produktion)**
+
+1. Kopieren Sie `.env.example` zu `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Öffnen Sie `.env` und tragen Sie Ihre Firebase-Credentials ein:
+   ```bash
+   REACT_APP_FIREBASE_API_KEY=AIza...
+   REACT_APP_FIREBASE_AUTH_DOMAIN=ihr-projekt.firebaseapp.com
+   # etc.
+   ```
+
+3. Die `.env` Datei wird **nicht** in Git committed (bereits in .gitignore)
 
 ### 5. App starten
 
