@@ -1,46 +1,65 @@
 import React from 'react';
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 import './InventoryTable.css';
 
 const InventoryTable = ({ items, onDeleteItem, supplierName }) => {
-  const handleExport = () => {
+  const handleExport = async () => {
     if (items.length === 0) {
       alert('Keine Daten zum Exportieren vorhanden');
       return;
     }
 
-    // Prepare data for Excel
-    const data = items.map((item, index) => ({
-      'Nr.': index + 1,
-      'Ersatzteilnummer': item.partNumber,
-      'Bezeichnung': item.description,
-      'Bestand': item.quantity || 0,
-      'Lieferant': item.supplier,
-      'Zeitstempel': new Date(item.timestamp).toLocaleString('de-DE')
-    }));
+    // Create a new workbook and worksheet
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Inventur');
 
-    // Create workbook and worksheet
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(data);
-
-    // Set column widths
-    ws['!cols'] = [
-      { wch: 5 },  // Nr.
-      { wch: 20 }, // Ersatzteilnummer
-      { wch: 30 }, // Bezeichnung
-      { wch: 10 }, // Bestand
-      { wch: 15 }, // Lieferant
-      { wch: 20 }  // Zeitstempel
+    // Define columns
+    worksheet.columns = [
+      { header: 'Nr.', key: 'nr', width: 5 },
+      { header: 'Ersatzteilnummer', key: 'partNumber', width: 20 },
+      { header: 'Bezeichnung', key: 'description', width: 30 },
+      { header: 'Bestand', key: 'quantity', width: 10 },
+      { header: 'Lieferant', key: 'supplier', width: 15 },
+      { header: 'Zeitstempel', key: 'timestamp', width: 20 }
     ];
 
-    XLSX.utils.book_append_sheet(wb, ws, 'Inventur');
+    // Add data rows
+    items.forEach((item, index) => {
+      worksheet.addRow({
+        nr: index + 1,
+        partNumber: item.partNumber,
+        description: item.description,
+        quantity: item.quantity || 0,
+        supplier: item.supplier,
+        timestamp: new Date(item.timestamp).toLocaleString('de-DE')
+      });
+    });
+
+    // Style the header row
+    const headerRow = worksheet.getRow(1);
+    headerRow.font = { bold: true };
+    headerRow.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFE0E0E0' }
+    };
+    headerRow.alignment = { vertical: 'middle', horizontal: 'left' };
 
     // Generate filename with timestamp
     const timestamp = new Date().toISOString().slice(0, 10);
     const filename = `Inventur_${supplierName}_${timestamp}.xlsx`;
 
-    // Save file
-    XLSX.writeFile(wb, filename);
+    // Write to buffer and download
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { 
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' 
+    });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+    window.URL.revokeObjectURL(url);
   };
 
   if (items.length === 0) {

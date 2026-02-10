@@ -20,7 +20,7 @@ Eine Progressive Web App für die Inventurdurchführung mit Barcode-Scanner und 
 - **Frontend**: React 18
 - **Backend**: Firebase (Authentication, Firestore)
 - **Scanner**: html5-qrcode für Barcode-Scanning
-- **Export**: xlsx für Excel-Generierung
+- **Export**: ExcelJS für Excel-Generierung (secure, actively maintained)
 - **PWA**: Service Worker für Offline-Funktionalität
 
 ## Projekt-Struktur

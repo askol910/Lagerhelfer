@@ -4,13 +4,13 @@
   "description": "Progressive Web App für Inventurdurchführung",
   "private": true,
   "dependencies": {
+    "exceljs": "^4.4.0",
+    "firebase": "^10.7.1",
+    "html5-qrcode": "^2.3.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "firebase": "^10.7.1",
     "react-firebase-hooks": "^5.1.1",
     "react-scripts": "5.0.1",
-    "html5-qrcode": "^2.3.8",
-    "xlsx": "^0.18.5",
     "web-vitals": "^3.5.0"
   },
   "scripts": {

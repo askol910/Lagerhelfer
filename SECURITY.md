@@ -12,9 +12,10 @@ Nach dem Audit wurden folgende Schwachstellen identifiziert:
 - **Risiko**: Niedrig für Production-Deployment
 
 #### Production Dependencies
-- **xlsx**: Bekannte Schwachstellen (Prototype Pollution, ReDoS)
-- **Status**: Wird nur client-seitig für Export verwendet
-- **Risiko**: Mittel - nur bei bösartigen Excel-Dateien (nicht relevant, da wir nur exportieren)
+- **ExcelJS**: Modern, secure Excel library
+- **Status**: Actively maintained, no known vulnerabilities
+- **Replaced**: xlsx (which had ReDoS and Prototype Pollution vulnerabilities)
+- **Risiko**: Low - secure alternative chosen
 
 ### Empfohlene Maßnahmen
 

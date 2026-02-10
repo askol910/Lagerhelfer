@@ -216,7 +216,7 @@ const handleScan = (scannedCode) => {
 
 1. **Barcode-Scanner**: Funktioniert nur über HTTPS oder localhost
 2. **iOS Kamera**: Benötigt explizite Berechtigung bei jedem Start
-3. **Offline-Modus**: Excel-Export benötigt die xlsx-Bibliothek (gecached)
+3. **Offline-Modus**: Excel-Export benötigt die ExcelJS-Bibliothek (gecached)
 4. **Firestore**: Aktuell nur lokale Datenhaltung, keine Cloud-Synchronisation
 
 ## 🔮 Zukünftige Erweiterungen
